@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Video-Highlight
 
-## Getting Started
 
-First, run the development server:
+## 流程
 
-```bash
+上傳影片送出後 後端 API 自動從 長度 30、60、120、180 中挑選一部並添加字幕資料後回傳
+
+## 技術
+
+- **框架**: Next.js (React)
+- **UI**: Material-UI
+- **狀態管理**: Redux
+- **工具**: lodash-es
+
+## 安裝與運行
+
+### 1. 安裝依賴
+npm install
+
+### 2. 啟動開發伺服器
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. 部署
+npm run build  
+npm start
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 專案結構目錄
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+📦 project-root  
+├── 📁 public        # 靜態資源 (影片)  
+├── 📁 src  
+│   ├── 📁 api  # RTK query 串接 api  
+│   ├── 📁 components  # 可重用的 UI 元件  
+│   ├── 📁 app       # Next.js 頁面路由  
+│   ├── 📁 store       # 狀態管理 (Redux)  
+│   ├── 📁 lib       # 通用工具函式  
+│   ├── 📁 views      # 主要畫面  
+├── .gitignore  
+├── .prettierrc.cjs     # prettier 設定  
+├── eslint.config.mjs   # eslint 設定  
+├── next-env.d.ts  
+├── next.config.ts  
+├── package.json  
+├── README.md  
 
-## Learn More
+## API 
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### **獲取字幕列表**
+#### `GET /analysisVideo`
+##### **請求**
+```http
+GET /api/analysisVideo
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+{
+    highlightVideoLength: 30,
+    highlightSentences:"highlightSentences": [
+    {
+        "id": "0",
+        "startTime": 0,
+        "length": 7,
+        "sentence": "He practiced his piano skills every evening, hoping to perform a beautiful song at the school concert.",
+        "section": "Introduction"
+    },
+    {
+        "id": "1",
+        "startTime": 8,
+        "length": 4,
+        "sentence": "The dog wagged its tail excitedly when it saw its owner return home after a long business trip.",
+        "section": "Educational"
+    },
+    {
+        "id": "2",
+        "startTime": 13,
+        "length": 5,
+        "sentence": "The students worked together on a science project, excited to present their findings to the class.",
+        "section": "Educational"
+    },
+    {
+        "id": "3",
+        "startTime": 19,
+        "length": 2,
+        "sentence": "He carefully painted a beautiful landscape of the countryside, using his favorite shades of blue and green.",
+        "section": "Key Feature"
+    },
+    {
+        "id": "4",
+        "startTime": 22,
+        "length": 6,
+        "sentence": "She dreams of traveling the whole world.",
+        "section": "Educational"
+    },
+    {
+        "id": "5",
+        "startTime": 29,
+        "length": 4,
+        "sentence": "He enjoys playing basketball with friends.",
+        "section": "Conclusion"
+    }]
+}
