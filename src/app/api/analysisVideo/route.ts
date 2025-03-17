@@ -79,6 +79,9 @@ function minVideoInterval(videoLength: number) {
   return getRandomBetween(baseInterval, baseInterval * 6);
 }
 
+// 進度小於 15 % Introduction
+// 進度在中間 隨機尋找一個 section
+// 進度大於 80 % Conclusion
 function getSections(videoLength: number, startTime: number) {
   const percentage = Math.floor((startTime / videoLength) * 100);
   if (percentage < 15) {
@@ -90,7 +93,7 @@ function getSections(videoLength: number, startTime: number) {
   return sections[6];
 }
 
-// 使用 Fisher-Yates Shuffle 來打亂 sentences
+// 使用 Fisher-Yates Shuffle 來打亂 sentences 確保每次api資料不同
 function shuffleArray(array: string[]) {
   const shuffled = [...array];
   for (let i = shuffled.length - 1; i > 0; i--) {
@@ -116,7 +119,7 @@ export async function GET() {
       id: i.toString(),
       startTime,
       length: getRandomBetween(2, 7),
-      sentence: shuffledSentences[i % shuffledSentences.length], // 確保不超出範圍
+      sentence: shuffledSentences[i],
       section: getSections(highlightVideoLength, startTime),
     });
 

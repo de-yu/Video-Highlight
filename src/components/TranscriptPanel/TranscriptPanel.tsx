@@ -49,6 +49,7 @@ export default function TranscriptPanel({
     setCheckSentenceId(selectSentenceId);
   }, [selectSentenceId]);
 
+  // 全選 checkbox 三種狀態
   const allSelectState = (ids: string[]) => {
     const intersectionIds = intersection(ids, checkSentenceId);
     if (intersectionIds.length === ids.length) {
@@ -60,6 +61,7 @@ export default function TranscriptPanel({
     return 'unchecked';
   };
 
+  // 根據三種不同狀態來設定 checkbox
   const allSelectHandler = (ids: string[]) => {
     const state = allSelectState(ids);
     let newSentenceId: string[] = [];
@@ -79,7 +81,7 @@ export default function TranscriptPanel({
   const handleCheck = (id: string) => {
     const newSentenceId = xor([id], checkSentenceId);
     setCheckSentenceId(newSentenceId);
-    onCheckSentence(checkSentenceId);
+    onCheckSentence(newSentenceId);
   };
 
   const handleClickTime = (

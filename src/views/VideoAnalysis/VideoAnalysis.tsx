@@ -61,6 +61,7 @@ export default function VideoAnalysis() {
     checkSentenceId.includes(item.id),
   );
 
+  // 如果沒有上傳影片 跳回上傳頁
   useEffect(() => {
     if (!isHasVideo) {
       router.push('/');

@@ -9,7 +9,7 @@
 
 - **框架**: Next.js (React)
 - **UI**: Material-UI
-- **狀態管理**: Redux
+- **狀態管理**: Redux Tookit, RTK query
 - **工具**: lodash-es
 
 ## 安裝與運行
@@ -29,7 +29,7 @@ npm start
 📦 project-root  
 ├── 📁 public        # 靜態資源 (影片)  
 ├── 📁 src  
-│   ├── 📁 api  # RTK query 串接 api  
+│   ├── 📁 api        # RTK query 串接 api  
 │   ├── 📁 components  # 可重用的 UI 元件  
 │   ├── 📁 app       # Next.js 頁面路由  
 │   ├── 📁 store       # 狀態管理 (Redux)  

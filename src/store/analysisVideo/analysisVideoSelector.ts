@@ -2,6 +2,7 @@ import { groupBy, flow, map, uniq } from 'lodash-es';
 import { analysisVideoSelectorDefault } from '@/store/analysisVideo/analysisVideoSelectorDefault';
 import { createSelector } from '@reduxjs/toolkit';
 import analysisVideoApi from '@/api/AnalysisVideo';
+import { AnalysisVideoResponse } from '@/lib/interface/api';
 
 export const analysisVideoSelector = createSelector(
   [
@@ -18,17 +19,19 @@ export const analysisVideoSelector = createSelector(
   },
 );
 
+// 按照順序取得 section
 export const videoSectionsSelector = createSelector(
   analysisVideoSelector,
   (data) => {
     const setSections = flow([
-      (arr) => map(arr, 'section'),
-      (arr) => uniq(arr),
+      (arr: AnalysisVideoResponse['highlightSentences']) => map(arr, 'section'),
+      (arr: string[]) => uniq(arr),
     ]);
     return setSections(data.highlightSentences);
   },
 );
 
+// 使用 section 進行分類
 export const videoSentencesSelector = createSelector(
   analysisVideoSelector,
   (data) => groupBy(data.highlightSentences, 'section'),
