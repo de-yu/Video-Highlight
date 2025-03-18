@@ -149,8 +149,8 @@ export default function VideoProgress({
         </ControlButton>
         {/* 顯示當前秒數 / 總時長 */}
         <Typography variant="h6">
-          {timeToString(Math.floor(currentTime))} /
-          {timeToString(Math.floor(duration))} 秒
+          {timeToString(Math.floor(currentTime))}/
+          {timeToString(Math.floor(duration))}
         </Typography>
       </VideoControl>
     </Box>
