@@ -54,14 +54,15 @@ npm start
 
 
 ### **獲取字幕列表**
-#### `GET /analysisVideo`
+#### GET /analysisVideo
 ##### **請求**
-```http
-GET /api/analysisVideo
 
+### http
+GET /api/analysisVideo
+```
 {
     highlightVideoLength: 30,
-    highlightSentences:"highlightSentences": [
+    highlightSentences:[
     {
         "id": "0",
         "startTime": 0,
@@ -105,3 +106,4 @@ GET /api/analysisVideo
         "section": "Conclusion"
     }]
 }
+```
