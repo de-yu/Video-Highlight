@@ -3,14 +3,21 @@
 
 ## 流程
 
-上傳影片送出後 後端 API 自動從 長度 30、60、120、180 中挑選一部並添加字幕資料後回傳
+上傳影片送出後 切換到分析頁面  
+使用 RTK Query 串接 API  
+後端 API 自動從 長度 30、60、120、180 中挑選長度並產生字幕資料後回傳  
 
+前端使用 selector 方法取得資料  
+使用 analysisVideoSelectorDefault 作為初始的資料  
+避免出現資料 undefined 的問題  
+並使用 selector 整理資料避免每次 render 資料都要重新計算  
+ 
 ## 技術
 
-- **框架**: Next.js (React)
+- **框架**: Next.js React
 - **UI**: Material-UI
 - **狀態管理**: Redux Tookit, RTK query
-- **工具**: lodash-es
+- **工具**: lodash-es (Tree shaking 優化)
 
 ## 安裝與運行
 

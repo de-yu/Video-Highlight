@@ -29,6 +29,6 @@ export const VideoControl = styled(Box)(() => ({
 }));
 
 export const ControlButton = styled(IconButton)(() => ({
-  width: '60px',
-  height: '60px',
+  width: '45px',
+  height: '45px',
 }));

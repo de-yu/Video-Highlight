@@ -6,6 +6,9 @@ export const VideoAnalysisMain = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.grey[300],
   display: 'flex',
   marginTop: '64px',
+  [theme.breakpoints.down('md')]: {
+    marginTop: '56px',
+  },
 }));
 
 export const EditPanel = styled(Box)(({ theme }) => ({
@@ -20,6 +23,7 @@ export const DrawerPanel = styled(Box)(({ theme }) => ({
   background: theme.palette.grey[100],
   padding: '16px',
   minHeight: '100%',
+  overflowY: 'auto',
 }));
 
 export const VideoPanel = styled(Box)(() => ({

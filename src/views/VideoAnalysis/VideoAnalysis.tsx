@@ -10,6 +10,7 @@ import {
   Drawer,
   useMediaQuery,
   useTheme,
+  CircularProgress,
 } from '@mui/material';
 import { Icon } from '@iconify/react';
 import {
@@ -49,7 +50,7 @@ export default function VideoAnalysis() {
   const videoSentences = useSelector(analysisVideoSelector);
   const isHasVideo = useSelector(hasVideo);
 
-  useGetAnalysisVideoQuery(undefined, {
+  const { isFetching } = useGetAnalysisVideoQuery(undefined, {
     skip: !isHasVideo,
   });
 
@@ -86,60 +87,81 @@ export default function VideoAnalysis() {
 
   return (
     <Box>
-      <AppBar position="fixed">
-        <Toolbar sx={{ textAlign: 'center' }}>
-          <IconButton
-            sx={{ display: { xs: 'block', sm: 'block', md: 'none' } }}
-            color="inherit"
-            onClick={drawerSwitch}
-          >
-            <Icon icon="fa6-solid:list-ul" />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <VideoAnalysisMain>
-        <Drawer
-          sx={{ display: { xs: 'block', sm: 'block', md: 'none' } }}
-          variant={matchPC ? 'permanent' : 'temporary'}
-          open={drawerOpen}
-          onClose={drawerClose}
+      {isFetching && (
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh',
+          }}
         >
-          <DrawerPanel>
-            <TranscriptPanel
-              selectSentenceId={checkSentenceId}
-              sectionSort={videoSections}
-              data={videoSentenceGroup}
-              onClickTime={setTime}
-              hasClosed
-              onClosed={drawerClose}
-              onCheckSentence={onCheckSentence}
-            />
-          </DrawerPanel>
-        </Drawer>
-        <EditPanel sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
-          <TranscriptPanel
-            selectSentenceId={checkSentenceId}
-            sectionSort={videoSections}
-            data={videoSentenceGroup}
-            onClickTime={setTime}
-            onCheckSentence={onCheckSentence}
-          />
-        </EditPanel>
-        <VideoPanel>
-          <VideoProgress
-            videoCurrentTime={timeTag}
-            videoPath={videoData[videoLength]}
-            setVideoTime={setTime}
-            data={checkSentence}
-          />
-          <SectionsProgressTag
-            data={checkSentence}
-            videoLength={videoLength}
-            progressNow={timeTag}
-            setProgressNow={setTime}
-          />
-        </VideoPanel>
-      </VideoAnalysisMain>
+          <CircularProgress />
+        </Box>
+      )}
+      {!isFetching && (
+        <>
+          <AppBar position="fixed">
+            <Toolbar>
+              <IconButton
+                sx={{ display: { xs: 'block', sm: 'block', md: 'none' } }}
+                color="inherit"
+                onClick={drawerSwitch}
+              >
+                <Icon icon="fa6-solid:list-ul" />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <VideoAnalysisMain>
+            <Drawer
+              sx={{
+                background: theme.palette.grey[100],
+                display: { xs: 'block', sm: 'block', md: 'none' },
+              }}
+              variant={matchPC ? 'permanent' : 'temporary'}
+              open={drawerOpen}
+              onClose={drawerClose}
+            >
+              <DrawerPanel>
+                <TranscriptPanel
+                  selectSentenceId={checkSentenceId}
+                  sectionSort={videoSections}
+                  data={videoSentenceGroup}
+                  onClickTime={setTime}
+                  hasClosed
+                  onClosed={drawerClose}
+                  onCheckSentence={onCheckSentence}
+                />
+              </DrawerPanel>
+            </Drawer>
+            <EditPanel
+              sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}
+            >
+              <TranscriptPanel
+                selectSentenceId={checkSentenceId}
+                sectionSort={videoSections}
+                data={videoSentenceGroup}
+                onClickTime={setTime}
+                onCheckSentence={onCheckSentence}
+              />
+            </EditPanel>
+            <VideoPanel>
+              <VideoProgress
+                videoCurrentTime={timeTag}
+                videoPath={videoData[videoLength]}
+                setVideoTime={setTime}
+                data={checkSentence}
+              />
+              <SectionsProgressTag
+                data={checkSentence}
+                videoLength={videoLength}
+                progressNow={timeTag}
+                setProgressNow={setTime}
+              />
+            </VideoPanel>
+          </VideoAnalysisMain>
+        </>
+      )}
     </Box>
   );
 }

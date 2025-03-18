@@ -6,6 +6,7 @@ export const ProgressBar = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.grey[200],
   borderRadius: '4px',
   position: 'relative',
+  cursor: 'pointer',
 }));
 
 export const ProgressTarget = styled(Box)(({ theme }) => ({

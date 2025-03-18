@@ -122,6 +122,7 @@ export default function VideoProgress({
       {videoPath !== '' && (
         <VideoBox>
           <VideoSrc
+            playsInline // 避免 iphone 直接進入全螢幕
             src={videoPath}
             ref={videoRef}
             onTimeUpdate={handleTimeUpdate}
@@ -148,7 +149,7 @@ export default function VideoProgress({
         </ControlButton>
         {/* 顯示當前秒數 / 總時長 */}
         <Typography variant="h6">
-          {timeToString(Math.floor(currentTime))} /{' '}
+          {timeToString(Math.floor(currentTime))} /
           {timeToString(Math.floor(duration))} 秒
         </Typography>
       </VideoControl>
